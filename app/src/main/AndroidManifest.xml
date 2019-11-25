@@ -40,7 +40,8 @@
         <activity android:name=".TrackedActivity" />
         <activity android:name=".TrackedShowActivity" />
         <activity android:name=".FavouritesActivity" />
-        <activity android:name=".MeaningsHymnActivity"></activity>
+        <activity android:name=".MeaningsHymnActivity" />
+        <activity android:name=".SearchActivity"></activity>
     </application>
 
 </manifest>

@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,6 +17,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -32,6 +37,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
    ArrayList<CategoryType> data=new ArrayList<>();
    ArrayList<String> names=new ArrayList<>();
+   ArrayList<String> english=new ArrayList<>();
    DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child("data").child("categories");
 
     @Override
@@ -39,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Select Category");
         setSupportActionBar(toolbar);
         TextView t1,t2;
         t1=(TextView)findViewById(R.id.username);
@@ -65,10 +72,50 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            public void onClick(final View view) {
+                DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference().child("data").child("hymn");
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for(DataSnapshot d:dataSnapshot.getChildren())
+                        {
+                            english.add(d.getKey());
+                        }
+                        AlertDialog.Builder builder=new AlertDialog.Builder(getApplicationContext());
+                        View v= getLayoutInflater().inflate(R.layout.searchlayout,null);
+                        builder.setView(v);
+                        final AutoCompleteTextView autoCompleteTextView=v.findViewById(R.id.searchedittext);
+                        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1,english.toArray());
+                        autoCompleteTextView.setAdapter(adapter);
+                        Button button=view.findViewById(R.id.searchbu);
+                        button.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                String text=autoCompleteTextView.getText().toString();
+                                if(english.contains(text))
+                                {
+                                    Intent i=new Intent(getApplicationContext(),HymnShow.class);
+                                    i.putExtra("sub",text);
+                                    startActivity(i);
+                                }
+                                else
+
+                                {
+                                    Snackbar.make(view,"Do not have such Hymn",Snackbar.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+               // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
 

@@ -1,5 +1,6 @@
 package com.dsss.ankush.shlokaabhyasanupdated;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -9,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -27,6 +29,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        final ProgressDialog progressDialog=new ProgressDialog(LoginActivity.this);
+        progressDialog.setTitle("Alert");
+        progressDialog.setMessage("Please wait");
+        progressDialog.setCancelable(false);
         if(!(FirebaseAuth.getInstance().getCurrentUser()==null))
         {
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
@@ -43,11 +49,12 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
+                progressDialog.show();
                FirebaseAuth.getInstance().signInWithEmailAndPassword(email.getText().toString(),password.getText().toString()).addOnFailureListener(new OnFailureListener() {
                    @Override
                    public void onFailure(@NonNull Exception e) {
                        Snackbar.make(view,e.getMessage(),Snackbar.LENGTH_LONG).show();
-
+                       progressDialog.dismiss();
                       // finish();
 
 
@@ -58,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                    {
                        Snackbar.make(view,"Succesfully Login",Snackbar.LENGTH_LONG).show();
                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                       progressDialog.dismiss();
                        finish();
 
                    }

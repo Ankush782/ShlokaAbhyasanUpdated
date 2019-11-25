@@ -23,6 +23,7 @@ public class MeaningsHymnActivity extends AppCompatActivity {
         setContentView(R.layout.activity_meanings_hymn);
 
         final String hymnname=getIntent().getStringExtra("sub");
+        getSupportActionBar().setTitle(hymnname);
 
         String language=getSharedPreferences("language",MODE_PRIVATE).getString("language","hymndata");
         final ListView listView=(ListView)findViewById(R.id.meaninglist);
