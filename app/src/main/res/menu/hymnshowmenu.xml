@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/downloadshow"
+        android:title="Download"
+        app:showAsAction="always"
+        android:icon="@drawable/downloadwhite"></item>
+    <item
+        android:id="@+id/trackedshow"
+        android:title="Tracked"
+        app:showAsAction="always"
+        android:icon="@drawable/assignmenty"></item>
+
+    <item
+        android:id="@+id/meaningshow"
+        android:title="Meaning"
+        app:showAsAction="always"
+        android:icon="@drawable/meaning">
+
+
+    </item>
+
+</menu>

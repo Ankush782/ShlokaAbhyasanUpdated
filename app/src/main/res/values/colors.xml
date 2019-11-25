@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FF5722</color>
+    <color name="colorPrimaryDark">#E64A19</color>
+    <color name="colorAccent">#FFEB3B</color>
+    <color name="primaryText">#212121</color>
+    <color name="secondryText">#757575</color>
+    <color name="icon">#FFFFFF</color>
+    <color name="learnt">#90ee90</color>
+    <color name="notread">#ff7f7f</color>
+    <color name="read">#fed8b1</color>
+</resources>
