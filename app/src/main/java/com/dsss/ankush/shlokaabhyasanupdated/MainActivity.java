@@ -2,6 +2,7 @@ package com.dsss.ankush.shlokaabhyasanupdated;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -50,8 +51,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TextView t1,t2;
         t1=(TextView)findViewById(R.id.username);
         t2=(TextView)findViewById(R.id.useremail);
-        t1.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-        t2.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        //t1.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+       // t2.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         final ListView listView=(ListView)findViewById(R.id.catlist) ;
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -73,51 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference().child("data").child("hymn");
-                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for(DataSnapshot d:dataSnapshot.getChildren())
-                        {
-                            english.add(d.getKey());
-                        }
-                        AlertDialog.Builder builder=new AlertDialog.Builder(getApplicationContext());
-                        View v= getLayoutInflater().inflate(R.layout.searchlayout,null);
-                        builder.setView(v);
-                        final AutoCompleteTextView autoCompleteTextView=v.findViewById(R.id.searchedittext);
-                        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1,english.toArray());
-                        autoCompleteTextView.setAdapter(adapter);
-                        Button button=view.findViewById(R.id.searchbu);
-                        button.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                String text=autoCompleteTextView.getText().toString();
-                                if(english.contains(text))
-                                {
-                                    Intent i=new Intent(getApplicationContext(),HymnShow.class);
-                                    i.putExtra("sub",text);
-                                    startActivity(i);
-                                }
-                                else
 
-                                {
-                                    Snackbar.make(view,"Do not have such Hymn",Snackbar.LENGTH_LONG).show();
-                                }
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-               // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -151,16 +108,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        SharedPreferences.Editor editor=getSharedPreferences("language",MODE_PRIVATE).edit();
+        editor.putString("language",item.getTitle().toString());
+        editor.commit();
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(getApplicationContext(),LoginActivity.class));
-            finish();
 
-
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }

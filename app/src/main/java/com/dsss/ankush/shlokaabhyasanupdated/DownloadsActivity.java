@@ -23,22 +23,22 @@ public class DownloadsActivity extends AppCompatActivity {
         int index=1;
         switch (language)
         {
-            case "english":
+            case "English":
             {
                 index=1;
                 break;
             }
-            case "hindi":
+            case "Hindi":
             {
                 index=2;
                 break;
             }
-            case "tamil":
+            case "Tamil":
             {
                 index=3;
                 break;
             }
-            case "telugu":
+            case "Telugu":
             {
                 index=4;
                 break;

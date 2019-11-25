@@ -9,4 +9,6 @@
     <color name="learnt">#90ee90</color>
     <color name="notread">#ff7f7f</color>
     <color name="read">#fed8b1</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

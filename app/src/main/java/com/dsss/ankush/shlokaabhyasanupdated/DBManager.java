@@ -47,7 +47,7 @@ public class DBManager {
         String[] columns = new String[] { DatabaseHelper._ID, DatabaseHelper.ENGLISH, DatabaseHelper.HINDI,DatabaseHelper.TAMIL,DatabaseHelper.TELUGU,DatabaseHelper.MEANING };
         Cursor cursor = database.query(DatabaseHelper.TABLE_NAME, columns, null, null, null, null, null);
         if (cursor != null) {
-           // cursor.moveToFirst();
+            //cursor.moveToFirst();
         }
         return cursor;
     }

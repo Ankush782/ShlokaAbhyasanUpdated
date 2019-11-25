@@ -54,10 +54,16 @@ public class SignUpActivity extends AppCompatActivity {
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
                             Snackbar.make(view,e.getMessage(),Snackbar.LENGTH_LONG).show();
 
                         }
                     });
+                }
+                else
+                {
+                    Snackbar.make(view,"Every Feild is necessary",Snackbar.LENGTH_LONG).show();
+                    progressDialog.dismiss();
                 }
             }
         });

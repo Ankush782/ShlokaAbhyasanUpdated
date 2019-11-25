@@ -34,7 +34,7 @@ public class HymnShow extends AppCompatActivity {
         getSupportActionBar().setTitle(getIntent().getStringExtra("sub"));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
       // String language="englsih";
-        String language=getSharedPreferences("language",MODE_PRIVATE).getString("language","hymndata");
+        String language=getSharedPreferences("language",MODE_PRIVATE).getString("language","English");
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child("data").child(language).child(getIntent().getStringExtra("sub"));
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override

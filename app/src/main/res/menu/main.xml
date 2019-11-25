@@ -2,8 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/english"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="English"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/hindi"
+        android:orderInCategory="100"
+        android:title="Hindi"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/tamil"
+        android:orderInCategory="100"
+        android:title="Tamil"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/telugu"
+        android:orderInCategory="100"
+        android:title="Talugu"
         app:showAsAction="never" />
 </menu>

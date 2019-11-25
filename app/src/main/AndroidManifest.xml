@@ -41,7 +41,7 @@
         <activity android:name=".TrackedShowActivity" />
         <activity android:name=".FavouritesActivity" />
         <activity android:name=".MeaningsHymnActivity" />
-        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".SearchActivity" />
     </application>
 
 </manifest>

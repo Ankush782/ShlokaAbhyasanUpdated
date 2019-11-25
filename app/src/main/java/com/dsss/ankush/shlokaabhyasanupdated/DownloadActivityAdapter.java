@@ -19,6 +19,7 @@ public class DownloadActivityAdapter extends BaseAdapter {
         this.c=c;
         names=n;
         meanings=m;
+        this.data=d;
     }
     @Override
     public int getCount() {
